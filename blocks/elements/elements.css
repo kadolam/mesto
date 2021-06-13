@@ -1,0 +1,31 @@
+.elements {
+    display: grid;
+    grid-area: auto;
+    grid-template-areas:
+        "element element element"
+        "element element element";
+    grid-gap: 17px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .elements {
+        grid-template-areas:
+            "element element"
+            "element element"
+            "element element";
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 526px) {
+    .elements {
+        grid-template-areas:
+            "element"
+            "element"
+            "element"
+            "element"
+            "element"
+            "element";
+        grid-gap: 20px;
+    }
+}

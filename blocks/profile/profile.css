@@ -1,0 +1,13 @@
+.profile {
+    color: white;
+    padding: 36px 0 47px;
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 650px) {
+    .profile {
+        padding: 38px 19px 36px;
+        flex-direction: column;
+    }
+}
