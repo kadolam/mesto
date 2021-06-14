@@ -2,8 +2,7 @@
     width: 142px;
     height: 33px;
     padding-bottom: 41px;
-    background-image: url(../../../images/logo.png);
-    background-repeat: no-repeat;
+    background: url(../../../images/logo.svg) no-repeat;
     background-size: contain;
 }
 

@@ -4,14 +4,14 @@ let openEditButton = document.querySelector('.profile__edit-button');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let formElement = document.querySelector('.popup__form');
-let inputName = document.querySelector('.popup__input_name');
-let inputJob = document.querySelector('.popup__input_job');
+let inputName = document.querySelector('.popup__input_text_name');
+let inputJob = document.querySelector('.popup__input_text_job');
 
 //open popup
 function openPopup() {
-    popup.classList.add('popup_opened');
     inputName.value = profileTitle.textContent;
     inputJob.value = profileSubtitle.textContent;
+    popup.classList.add('popup_opened');
 }
 
 openEditButton.addEventListener('click', openPopup);
