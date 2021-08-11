@@ -3,4 +3,5 @@
     max-width: 282px;
     background: #FFFFFF;
     overflow: hidden;
+    position: relative;
 }
