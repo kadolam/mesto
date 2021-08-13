@@ -74,34 +74,6 @@ closeImgPopupButton.addEventListener('click', () => {
 });
 
 //cards array
-
-/*
-function renderCard(name, link) {
-  const cardTemplate = document.querySelector('#element-card').content;
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  
-  cardElement.querySelector('.element__title').textContent = name;
-  cardElement.querySelector('.element__img').src = link;
-  cardElement.querySelector('.element__like').addEventListener('click', function (evt) {
-  evt.target.classList.toggle('element__like_active');
-});
-  cardElement.querySelector('.element__delete-btn').addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove();
-  });
-  cardElement.querySelector('.element__img').addEventListener('click', function() {
-    openPopup(imgPopup);
-    srcImgPopup.src = link;
-    figcaptionImgPopup.textContent = name;
-  });
-  
-elementContainer.prepend(cardElement);
-}
-
-initialCards.forEach((item) => {
-  renderCard(item.name, item.link);
-});
-*/
-
 const cardTemplate = document.querySelector('#element-card').content;
 
 function renderCard(name, link) {
