@@ -54,6 +54,8 @@ openEditButton.addEventListener('click', () => {
   openPopup(editPopup);
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
+  inputName.dispatchEvent(new Event('input'));
+  inputJob.dispatchEvent(new Event('input'));
 });
 openAddButton.addEventListener('click', () => {
   openPopup(addPopup);
@@ -71,6 +73,22 @@ closeAddPopupButton.addEventListener('click', () => {
 });
 closeImgPopupButton.addEventListener('click', () => {
   closePopup(imgPopup);
+});
+
+//overlay close
+document.addEventListener('mousedown', (evt) => {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+});
+
+//escape close
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(editPopup);
+    closePopup(addPopup);
+    closePopup(imgPopup);
+  }
 });
 
 //cards array
@@ -125,4 +143,5 @@ function formSubmitHandler (evt) {
 }
 
 formEditElement.addEventListener('submit', formSubmitHandler);
+
 
