@@ -49,21 +49,24 @@ const initialCards = [
 //open popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', escape);
 }
 openEditButton.addEventListener('click', () => {
   openPopup(editPopup);
   inputName.value = profileTitle.textContent;
   inputJob.value = profileSubtitle.textContent;
-  inputName.dispatchEvent(new Event('input'));
-  inputJob.dispatchEvent(new Event('input'));
 });
 openAddButton.addEventListener('click', () => {
   openPopup(addPopup);
+  const inputsAddPopup = Array.from(addPopup.querySelectorAll('.popup__input'));
+  const saveAddPopupButton = addPopup.querySelector('.popup__save-btn');
+  toggleButtonState(inputsAddPopup, saveAddPopupButton, settings);
 });
 
 //close popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', escape);
 }
 closeEditPopupButton.addEventListener('click', () => {
   closePopup(editPopup);
@@ -83,13 +86,12 @@ document.addEventListener('mousedown', (evt) => {
 });
 
 //escape close
-document.addEventListener('keydown', (evt) => {
+function escape(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    closePopup(editPopup);
-    closePopup(addPopup);
-    closePopup(imgPopup);
+    closePopup(popupOpened);
   }
-});
+}
 
 //cards array
 const cardTemplate = document.querySelector('#element-card').content;
@@ -103,6 +105,7 @@ function createCard(name, link) {
 
   cardElement.querySelector('.element__title').textContent = name;
   cardElement.querySelector('.element__img').src = link;
+  cardElement.querySelector('.element__img').alt = name;
   cardElement.querySelector('.element__like').addEventListener('click', function (evt) {
   evt.target.classList.toggle('element__like_active');
 });
@@ -112,6 +115,7 @@ function createCard(name, link) {
   cardElement.querySelector('.element__img').addEventListener('click', function() {
     openPopup(imgPopup);
     srcImgPopup.src = link;
+    srcImgPopup.alt = name;
     figcaptionImgPopup.textContent = name;
   });
 
@@ -127,8 +131,7 @@ initialCards.forEach((item) => {
 function addCard (evt) {
   evt.preventDefault();
   renderCard(inputTitle.value, inputUrl.value);
-  inputTitle.value = '';
-  inputUrl.value = '';
+  formAddElement.reset();
   closePopup(addPopup);
 }
 
