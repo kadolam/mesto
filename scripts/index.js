@@ -76,9 +76,8 @@ openEditButton.addEventListener('click', () => {
 });
 openAddButton.addEventListener('click', () => {
   openPopup(addPopup);
-  const inputsAddPopup = Array.from(addPopup.querySelectorAll('.popup__input'));
   const saveAddPopupButton = addPopup.querySelector('.popup__save-btn');
-  //toggleButtonState(inputsAddPopup, saveAddPopupButton, settings);
+  addFormValidator.resetValidation();
 });
 
 //close popup
@@ -105,16 +104,19 @@ document.addEventListener('mousedown', (evt) => {
 
 //escape close
 function escape(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 }
 
-function renderCard(data) {
+function createCard(data) {
   const card = new Card(data, '#element-card');
-  const cardElement = card.generateCard();
+  return card.generateCard();
+}
 
+function renderCard(data) {
+  const cardElement = createCard(data);
   elementContainer.prepend(cardElement);
 }
 

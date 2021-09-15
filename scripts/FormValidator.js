@@ -25,17 +25,34 @@ export class FormValidator {
       }
   }
 
+  resetValidation() {
+    this._toggleButtonState();
+
+    this._inputs.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  }
+
+  _showInputError(inputElement) {
+    const errorElement = this._formsElement.querySelector(`#${inputElement.name}-error`);
+    inputElement.classList.add(this._inputErrorClass);
+    errorElement.classList.add(this._errorClass);
+    errorElement.textContent = inputElement.validationMessage;
+  }
+
+  _hideInputError(inputElement) {
+    const errorElement = this._formsElement.querySelector(`#${inputElement.name}-error`);
+    inputElement.classList.remove(this._inputErrorClass);
+    errorElement.classList.remove(this._errorClass);
+    errorElement.textContent = '';
+  }
+
   _inputHandler(inputElement) {
-      const errorElement = this._formsElement.querySelector(`#${inputElement.name}-error`);
   if (!inputElement.validity.valid) {
-      inputElement.classList.add(this._inputErrorClass);
-      errorElement.classList.add(this._errorClass);
-      errorElement.textContent = inputElement.validationMessage;
+    this._showInputError(inputElement);
   }
   else {
-      inputElement.classList.remove(this._inputErrorClass);
-      errorElement.classList.remove(this._errorClass);
-      errorElement.textContent = '';
+    this._hideInputError(inputElement);
       };
   }
 
@@ -43,24 +60,21 @@ export class FormValidator {
       this._inputs = Array.from(this._formsElement.querySelectorAll(this._inputSelector));
       this._buttonElement = this._formsElement.querySelector(this._submitButtonSelector);
 
-      this._toggleButtonState(this._inputs, this._buttonElement);
+      this._toggleButtonState();
 
       this._inputs.forEach((inputElement) => {
           inputElement.addEventListener('input', (evt) => {
               this._inputHandler(inputElement);
-              this._toggleButtonState(this._inputs, this._buttonElement);
+              this._toggleButtonState();
           });
       });
   }
 
   enableValidation() {
-      const formList = Array.from(document.querySelectorAll(this._formSelector));
-      formList.forEach((formsElement) => {
-          formsElement.addEventListener('submit', function (evt) {
-              evt.preventDefault();
-          });
+    this._formsElement.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+    });
 
-          this._setEventListeners();
-      });
-  }
+    this._setEventListeners();
+  };
 }
