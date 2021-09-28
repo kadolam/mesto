@@ -1,19 +1,12 @@
-import {
-  openPopup,
-  imgPopup,
-  srcImgPopup,
-  figcaptionImgPopup
-} from './index.js';
-
 export class Card {
-  constructor(data, cardSelector) {
+  constructor( { data, handleCardClick }, cardSelector) {
       this._name = data.name;
       this._link = data.link;
       this._cardSelector = cardSelector;
+      this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
-    console.log(this._cardSelector);
     const cardTemplate = document
       .querySelector(this._cardSelector)
       .content
@@ -55,12 +48,5 @@ export class Card {
   _handleDeleteClick() {
     this._element.querySelector('.element__delete-btn').closest('.element').remove();
   }
-
-  _handleCardClick() {
-    openPopup(imgPopup);
-    srcImgPopup.src = this._link;
-    srcImgPopup.alt = this._name;
-    figcaptionImgPopup.textContent = this._name;
-  }
-
 }
+
