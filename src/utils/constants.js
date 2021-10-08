@@ -11,6 +11,7 @@ export const openEditButton = document.querySelector('.profile__edit-button');
 export const openAddButton = document.querySelector('.profile__add-button');
 export const profileTitle = document.querySelector('.profile__title');
 export const profileSubtitle = document.querySelector('.profile__subtitle');
+export const profileAvatar = document.querySelector('.profile__avatar');
 export const formEditElement = editPopup.querySelector('.popup__form');
 export const formAddElement = addPopup.querySelector('.popup__form');
 export const inputName = editPopup.querySelector('.popup__input_text_name');
@@ -19,6 +20,8 @@ export const inputTitle = addPopup.querySelector('.popup__input_text_title');
 export const inputUrl = addPopup.querySelector('.popup__input_text_url');
 export const elementContainer = document.querySelector('.elements');
 export const elementTitle = document.querySelector('.element__title');
+export const elementImage = document.querySelector('.element__img');
+
 
 export const initialCards = [
     {
