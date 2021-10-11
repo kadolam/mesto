@@ -89,4 +89,38 @@ export default class Api {
       })
   }
 
+  likeStatus(cardId, isLiked) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: isLiked ? 'PUT' : 'DELETE',
+      headers: this._headers
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  patchAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
 }

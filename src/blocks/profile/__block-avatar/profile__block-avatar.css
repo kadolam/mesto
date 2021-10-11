@@ -1,0 +1,23 @@
+.profile__block-avatar {
+  position: relative;
+  margin-right: 30px;
+  border-radius: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.profile__block-avatar:hover .profile__pencil {
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.profile__block-avatar:hover .profile__background {
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+@media screen and (max-width: 650px) {
+  .profile__block-avatar {
+    margin: auto;
+  }
+}

@@ -16,7 +16,11 @@
 
         <main class="main">
             <section class="profile">
-                <img src="#" alt="аватар" class="profile__avatar">
+                <div class="profile__block-avatar">
+                  <img src="#" alt="аватар" class="profile__avatar">
+                  <div class="profile__pencil"></div>
+                  <div class="profile__background"></div>
+                </div>
                 <div class="profile__container">
                     <div class="profile__info">
                         <div class="profile__title-container">
@@ -49,7 +53,7 @@
                     <span class="popup__input-error" id="name-error"></span>
                     <input type="text" name="job" class="popup__input popup__input_text_job" placeholder="О себе" minlength="2" maxlength="200" required>
                     <span class="popup__input-error" id="job-error"></span>
-                    <button type="submit" aria-label="" class="popup__save-btn">Сохранение...</button>
+                    <button type="submit" aria-label="" class="popup__save-btn">Сохранить</button>
                 </fieldset>
             </form>
         </div>
@@ -65,7 +69,7 @@
                     <span class="popup__input-error" id="title-error"></span>
                     <input type="url" name="url" class="popup__input popup__input_text_url" placeholder="Ссылка на картинку" required>
                     <span class="popup__input-error" id="url-error"></span>
-                    <button type="submit" aria-label="" class="popup__save-btn">Создание...</button>
+                    <button type="submit" aria-label="" class="popup__save-btn">Создать</button>
                 </fieldset>
             </form>
         </div>
@@ -73,9 +77,11 @@
 
     <div class="popup popup_delete">
       <div class="popup__container">
-          <button type="button" aria-label="Закрытие попапа." class="popup__close-btn"></button>
-          <h3 class="popup__title popup__title_size">Вы уверены?</h3>
-          <button type="button" aria-label="" class="popup__save-btn popup__save-btn_size">Да</button>
+        <button type="button" aria-label="Закрытие попапа." class="popup__close-btn"></button>
+        <h3 class="popup__title popup__title_size">Вы уверены?</h3>
+        <form action="#" method="POST" name="popup-delete" class="popup__form" novalidate>
+          <button type="submit" aria-label="" class="popup__save-btn popup__save-btn_size">Да</button>
+        </form>
       </div>
   </div>
 
@@ -87,6 +93,20 @@
                 <figcaption class="popup__figcaption"></figcaption>
             </figure>
         </div>
+    </div>
+
+    <div class="popup popup_avatar">
+      <div class="popup__container">
+          <button type="button" aria-label="Закрытие попапа." class="popup__close-btn"></button>
+          <form action="#" method="POST" name="popup-avatar" class="popup__form" novalidate>
+              <h3 class="popup__title">Обновить аватар</h3>
+              <fieldset class="popup__fieldset">
+                  <input type="url" name="url" class="popup__input popup__input_text_avatar" placeholder="Ссылка на картинку" required>
+                  <span class="popup__input-error" id="avatar-error"></span>
+                  <button type="submit" aria-label="" class="popup__save-btn">Сохранить</button>
+              </fieldset>
+          </form>
+      </div>
     </div>
 
     <template id="element-card">

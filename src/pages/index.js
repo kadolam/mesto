@@ -3,6 +3,7 @@ import './index.css';
 import {
   openEditButton,
   openAddButton,
+  openAvatar,
   profileTitle,
   profileSubtitle,
   profileAvatar,
@@ -56,6 +57,11 @@ openAddButton.addEventListener('click', () => {
   addFormValidator.resetValidation();
 });
 
+openAvatar.addEventListener('click', () => {
+  avatarForm.open();
+  addFormValidator.resetValidation();
+});
+
 //create card
 function createCard(item) {
   const card = new Card({
@@ -63,8 +69,16 @@ function createCard(item) {
     handleCardClick: () => {
       popupImage.open(item);
     },
-    handleDelete: (item) => {
-      console.log(item); //undefined
+    handleLikeClick: () => {
+      api.likeStatus(item._id, !card.isLiked())
+        .then(data => {
+          card.setLikesInfo(data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    handleDelete: () => {
       popupDelete.open();
       popupDelete.setSubmit(() => {
         api.removeCard(item._id)
@@ -93,7 +107,10 @@ popupDelete.setEventListeners();
 const cardsList = new Section({
   renderer: (item) => {
     const cardElement = createCard(item);
-    cardElement.querySelector('.element__like-number').textContent = item.likes.length;
+    //cardElement.querySelector('.element__like-number').textContent = item.likes.length;
+    if ('c0627b1f572800be1c8aca4f' !== item.owner._id) {
+      cardElement.querySelector('.element__delete-btn').hidden = true;
+    };
     cardsList.addItem(cardElement);
     },
   },
@@ -114,10 +131,7 @@ api.getInitialCards()
 const addCard = new PopupWithForm({
   popup: '.popup_add',
   handleFormSubmit: (data) => {
-    /*const newCardItem = {
-      name: data.title,
-      link: data.url
-    };*/
+    addCard.loading(true, 'Создание...');
     api.postCard(data.title, data.url)
       .then((res) => {
         const cardElement = createCard(res);
@@ -126,6 +140,9 @@ const addCard = new PopupWithForm({
       })
       .catch(err => {
         console.log(err);
+      })
+      .finally(() => {
+        addCard.loading(false);
       });
   }
 });
@@ -135,7 +152,8 @@ addCard.setEventListeners();
 //popup profile
 const editInfo = new UserInfo({
   userName: profileTitle,
-  userJob: profileSubtitle
+  userJob: profileSubtitle,
+  userAvatar: profileAvatar
 });
 
 api.getUserInfo()
@@ -151,7 +169,7 @@ api.getUserInfo()
 const editForm = new PopupWithForm({
   popup: '.popup_edit',
   handleFormSubmit: (data) => {
-    console.log(data);
+    editForm.loading(true, 'Сохранение...');
     api.patchUserInfo(data.name, data.job)
     .then((res) => {
       editInfo.setUserInfo(res);
@@ -160,8 +178,30 @@ const editForm = new PopupWithForm({
     .catch(err => {
       console.log(err);
     })
+    .finally(() => {
+      editForm.loading(false);
+    })
   }
 });
 
 editForm.setEventListeners();
 
+const avatarForm = new PopupWithForm({
+  popup: '.popup_avatar',
+  handleFormSubmit: (data) => {
+    avatarForm.loading(true, 'Сохранение...');
+    api.patchAvatar(data.url)
+    .then((res) => {
+      editInfo.setUserInfo(res);
+      avatarForm.close();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      avatarForm.loading(false);
+    })
+  }
+});
+
+avatarForm.setEventListeners();
