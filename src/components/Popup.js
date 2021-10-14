@@ -1,6 +1,6 @@
 export default class Popup {
-  constructor(popup) {
-    this._popup = document.querySelector(popup);
+  constructor(popupSelector) {
+    this._popup = document.querySelector(popupSelector);
     this._submitButton = this._popup.querySelector('.popup__save-btn');
     this._handleEscClose = this._handleEscClose.bind(this);
   }
@@ -13,16 +13,6 @@ export default class Popup {
   close() {
     this._popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscClose);
-  }
-
-  loading(isLoading, text) {
-    if(isLoading) {
-      this._submitText = this._submitButton.textContent;
-      this._submitButton.textContent = text;
-    }
-    else {
-      this._submitButton.textContent = this._submitText;
-    }
   }
 
   _handleEscClose(evt) {

@@ -1,8 +1,8 @@
 import Popup from './Popup.js';
 
 export default class PopupWithDelete extends Popup {
-  constructor(popup) {
-    super(popup);
+  constructor(popupSelector) {
+    super(popupSelector);
     this._popupForm = this._popup.querySelector('.popup__form');
   }
 
