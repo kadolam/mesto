@@ -187,7 +187,7 @@ const avatarForm = new PopupWithForm({
   popupSelector: '.popup_avatar',
   handleFormSubmit: (data) => {
     avatarForm.renderLoading(true, 'Сохранение...');
-    api.patchAvatar(data.url)
+    api.patchAvatar(data.avatar)
       .then((res) => {
         userInfo.setUserInfo(res);
         avatarForm.close();

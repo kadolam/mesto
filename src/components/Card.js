@@ -10,7 +10,6 @@ export class Card {
       this._handleCardClick = handleCardClick;
       this._handleDelete = handleDelete;
       this._handleLikeClick = handleLikeClick;
-
   }
 
   _getTemplate() {
@@ -44,7 +43,7 @@ export class Card {
     this._liked = this._likes.some((item) => {
       return item._id === this._userId
     });
-    
+
     if (this._liked) {
       this._like.classList.add('element__like_active');
     } else {
@@ -75,6 +74,7 @@ export class Card {
   setLikesInfo(likes) {
     this._likesInfo = likes;
     this._likeCounter.textContent = this._likesInfo.likes.length;
+    this._like.classList.add('element__like_active');
   }
 
   isLiked() {
